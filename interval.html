@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interval Training</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #label {
+      text-align: center;
+      font-size: 24px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      color: black;
+    }
+  </style>
+  <script src="dojo.js"></script>
+</head>
+
+<body>
+  <div id="label" onclick="on_start_click();">Press me to start!</div>
+  <script>
+    function on_start_click() {
+      console.log("Start clicked");
+      interval = setInterval(update, 1000);
+      document.getElementById('label').innerText = "Yoi!";
+    }
+    var init_interval_length = 5; // seconds
+    var num_intervals = 3;
+    var pause = 0;
+    var actions = ["attack", "defend"];
+    //var actions = ["mountain climber", "push-up", "sit-up", "squat", "supermans", "plank", "lunges", "burpees"];
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString)
+    if (urlParams.has('pause')) {
+      pause = parseInt(urlParams.get('pause'));
+    }
+    if (urlParams.has('actions')) {
+      actions = urlParams.get('actions').split(",");
+    }
+    if (urlParams.has('num_intervals')) {
+      num_intervals = parseInt(urlParams.get('num_intervals'));
+    }
+    if (urlParams.has('interval_length')) {
+      init_interval_length = parseInt(urlParams.get('interval_length'));
+    }
+
+    var interval_length = 4;
+    var counter = interval_length;
+
+    var action_idx = 0;
+
+    var cur_state = "pre";
+    var cur_interval = 0;
+
+    if (pause > 0) {
+      // Add "pause" to the actions array in every second position
+      var a2 = [];
+      for (var i = 0; i < actions.length; i++) {
+        a2.push(actions[i]);
+        a2.push("pause");
+      }
+      a2.pop();
+      actions = a2;
+      //console.log(actions);
+    }
+
+
+    //var interval = setInterval(update, 1000);
+
+    function update() {
+      counter--;
+
+      if (cur_state == "pre") {
+        document.getElementById('label').innerText = counter;
+      } else if (cur_state == "during") {
+        document.getElementById('label').innerText = actions[action_idx] + ": " + counter;
+      } else if (cur_state == "post") {
+        document.getElementById('label').innerText = "Yame!";
+        clearInterval(interval);
+      }
+      //console.log(cur_state + " " + cur_interval + " " + action_idx + " " + counter);
+
+      if (counter == 0) {
+        if (cur_state == "pre") {
+          action_idx = 0;
+          counter = init_interval_length;
+          cur_state = "during";
+          cur_interval = 0;
+
+          document.getElementById('label').innerText = "Hajime!";
+          // play beep sound
+          context = new AudioContext();
+          beep();
+
+
+        } else if (cur_state == "during") {
+          context = new AudioContext();
+          beep();
+
+          counter = init_interval_length;
+          action_idx = (action_idx + 1) % actions.length;
+          if (actions[action_idx] == "pause") {
+            counter = pause;
+          }
+
+          cur_interval++;
+
+          if (cur_interval == num_intervals * actions.length) {
+            console.log("Done");
+            cur_state = "post";
+          }
+
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
