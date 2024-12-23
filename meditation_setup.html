@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interval Training</title>
+  <style>
+    /* body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    } */
+    input[type="range"] {
+      width: 400px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <script src="dojo.js"></script>
+  <script>
+    function update() {
+      var meditation_length = document.getElementById('meditation_length').value;
+
+
+      document.getElementById('il_value').innerText = secondsToMinutesAndSeconds(meditation_length);
+    }
+
+    function on_start_click(actions) {
+      console.log("Start clicked for meditation");
+      var meditation_length = document.getElementById('meditation_length').value;
+      var num_intervals = 1;
+      var pause = 0;
+      var actions = ["meditate"];
+      // open interval.html with the following parameters
+      //window.open("interval.html?meditation_length=" + meditation_length + "&num_intervals=" + num_intervals + "&pause=" + pause + "&actions=" + actions.join(","));
+      location.href = "interval.html?interval_length=" + meditation_length + "&num_intervals=" + num_intervals + "&pause=" + pause + "&actions=" + actions + "&begin_text=Mokuso" + "&end_text=Mokuso%20yame";
+    }
+  </script>
+</head>
+
+<body onload="update();">
+  <h1>Setup Meditation</h1>
+
+  <section>
+    <h3>General</h3>
+    <div>
+      <label for="meditation_length">Meditation Length</label>
+      <input type="range" id="meditation_length" name="meditation_length" min="30" max="3600" value="120" step="30"
+        oninput="update();">
+      <output for="meditation_length" id="il_value">30s</output>
+      <button onclick="on_start_click();">Start</button>
+    </div>
+  </section>
+</body>
+
+</html>

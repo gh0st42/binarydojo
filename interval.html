@@ -58,6 +58,14 @@
     if (urlParams.has('interval_length')) {
       init_interval_length = parseInt(urlParams.get('interval_length'));
     }
+    var begin_text = "Hajime!";
+    var end_text = "Yame!";
+    if (urlParams.has('begin_text')) {
+      begin_text = urlParams.get('begin_text');
+    }
+    if (urlParams.has('end_text')) {
+      end_text = urlParams.get('end_text');
+    }
 
     var interval_length = 4;
     var counter = interval_length;
@@ -90,7 +98,9 @@
       } else if (cur_state == "during") {
         document.getElementById('label').innerText = actions[action_idx] + ": " + counter;
       } else if (cur_state == "post") {
-        document.getElementById('label').innerText = "Yame!";
+        document.getElementById('label').innerText = end_text;
+        context = new AudioContext();
+        beep();
         clearInterval(interval);
       }
       //console.log(cur_state + " " + cur_interval + " " + action_idx + " " + counter);
@@ -102,7 +112,7 @@
           cur_state = "during";
           cur_interval = 0;
 
-          document.getElementById('label').innerText = "Hajime!";
+          document.getElementById('label').innerText = begin_text;
           // play beep sound
           context = new AudioContext();
           beep();
