@@ -53,20 +53,50 @@
       font-size: 1em;
       padding: 40px;
     }
+
+    #styleselect {
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      font-size: smaller;
+    }
   </style>
+  <script src="dojo.js"></script>
+  <script>
+    function update() {
+      var style = document.getElementById('styleselect_combo').value;
+      console.log("Style selected: " + style);
+      var kod_link = document.getElementById('kod_link');
+      kod_link.href = "kod.html?style=" + style;
+    }
+  </script>
 </head>
 
 <body>
   <h1>Binary Dojo</h1>
+  <div id="styleselect">
+    Choose your style:
+    <select onchange="update();" id="styleselect_combo">
+      <option value="shotokan">Shotokan</option>
+      <option value="goju-ryu">Goju-ryu</option>
+      <option value="wado-ryu">Wado-ryu</option>
+    </select>
+  </div>
   <ul>
+    <li><u>Kihon</u></li>
+    <li><a href="kihon_setup.html" title="Basics">Basic techniques</a></li>
+    <br>
     <li><u>Kata</u></li>
-    <li><a href="kod.html" title="Show KOD">Kata of the Day</a></li>
+    <li><a href="kod.html" title="Show KOD" id="kod_link">Kata of the Day</a></li>
     <br>
     <li><u>Kumite</u></li>
-    <li><a href="interval_setup.html" title="Setup interval training for kumite and fitness.">Interval Training</a></li>
+    <li><a href="kumite_interval_setup.html" title="Setup interval training for kumite.">Interval
+        Training</a></li>
     <br>
     <li><u>Extras</u></li>
-    <li><a href="interval_setup.html" title="Setup interval training for kumite and fitness.">Interval Training</a></li>
+    <li><a href="fitness_interval_setup.html" title="Setup interval training for fitness.">Interval Training</a></li>
     <li><a href="meditation_setup.html" title="A round of silent meditation.">Meditation</a></li>
   </ul>
 </body>

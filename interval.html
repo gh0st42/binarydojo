@@ -34,9 +34,15 @@
   <div id="label" onclick="on_start_click();">Press me to start!</div>
   <script>
     function on_start_click() {
-      console.log("Start clicked");
-      interval = setInterval(update, 1000);
-      document.getElementById('label').innerText = "Yoi!";
+      if (cur_state == "pre") {
+        console.log("Start clicked");
+        interval = setInterval(update, 1000);
+        document.getElementById('label').innerText = "Yoi!";
+      } else if (cur_state == "during" && manual_advance) {
+        console.log("Manual advance");
+        counter = 0;
+        update();
+      }
     }
     var init_interval_length = 5; // seconds
     var num_intervals = 3;
@@ -54,9 +60,18 @@
     }
     if (urlParams.has('num_intervals')) {
       num_intervals = parseInt(urlParams.get('num_intervals'));
+      if (num_intervals == 0) {
+        num_intervals = 1;
+      }
     }
     if (urlParams.has('interval_length')) {
       init_interval_length = parseInt(urlParams.get('interval_length'));
+    }
+    var manual_advance = false;
+    if (urlParams.has('manual_advance')) {
+      if (urlParams.get('manual_advance') == 1) {
+        manual_advance = true;
+      }
     }
     var begin_text = "Hajime!";
     var end_text = "Yame!";
@@ -96,7 +111,12 @@
       if (cur_state == "pre") {
         document.getElementById('label').innerText = counter;
       } else if (cur_state == "during") {
-        document.getElementById('label').innerText = actions[action_idx] + ": " + counter;
+        if (manual_advance) {
+          counter++;
+          document.getElementById('label').innerText = actions[action_idx];
+        } else {
+          document.getElementById('label').innerText = actions[action_idx] + ": " + counter;
+        }
       } else if (cur_state == "post") {
         document.getElementById('label').innerText = end_text;
         context = new AudioContext();
@@ -106,6 +126,7 @@
       //console.log(cur_state + " " + cur_interval + " " + action_idx + " " + counter);
 
       if (counter == 0) {
+        console.log("Counter is 0");
         if (cur_state == "pre") {
           action_idx = 0;
           counter = init_interval_length;
@@ -116,6 +137,10 @@
           // play beep sound
           context = new AudioContext();
           beep();
+          if (manual_advance) {
+            clearInterval(interval);
+            setTimeout(update, 1000);
+          }
 
 
         } else if (cur_state == "during") {
@@ -129,10 +154,13 @@
           }
 
           cur_interval++;
-
+          console.log("Cur interval: " + cur_interval + " " + num_intervals + " " + actions.length);
           if (cur_interval == num_intervals * actions.length) {
             console.log("Done");
             cur_state = "post";
+          }
+          if (manual_advance) {
+            setTimeout(update, 100);
           }
 
         }

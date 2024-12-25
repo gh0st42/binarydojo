@@ -104,6 +104,6 @@ const shotokan = [
 
 const katas = {
   "shotokan": shotokan,
-  "gojuryu": gojuryu,
-  "wadoryu": wadoryu,
+  "goju-ryu": gojuryu,
+  "wado-ryu": wadoryu,
 };

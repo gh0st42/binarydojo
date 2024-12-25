@@ -40,10 +40,6 @@
       document.getElementById('attack_defend_time').innerText = secondsToMinutesAndSeconds((interval_length * num_intervals * actions_kad.length) + (num_intervals * pause * actions_kad.length));
       document.getElementById('custom_time').innerText = secondsToMinutesAndSeconds((interval_length * num_intervals * actions_custom.length) + (num_intervals * pause * actions_custom.length));
       document.getElementById('punch_kick_time').innerText = secondsToMinutesAndSeconds((interval_length * num_intervals * actions_pk.length) + (num_intervals * pause * actions_pk.length));
-      document.getElementById('tabata_time').innerText = secondsToMinutesAndSeconds((interval_length * num_intervals * actions_tabata.length) + (num_intervals * pause * actions_tabata.length));
-      document.getElementById('fb_time').innerText = secondsToMinutesAndSeconds((interval_length * num_intervals * actions_fb.length) + (num_intervals * pause * actions_fb.length));
-      document.getElementById('wtf_time').innerText = secondsToMinutesAndSeconds((interval_length * num_intervals * actions_wtf.length) + (num_intervals * pause * actions_wtf.length));
-
     }
     function set_timings(interval_length, num_intervals, pause) {
       document.getElementById('interval_length').value = interval_length;
@@ -103,41 +99,6 @@
       <output for="actions_pk" id="punch_kick_time">0</output>
       <button onclick="set_timings(30,3,0);">Set default timing</button>
       <button onclick="on_start_click(document.getElementById('actions_pk').value);">Start</button>
-    </div>
-
-  </section>
-  <section>
-    <h3>Fitness</h3>
-
-    <div>
-      <h4>Tabata</h4>
-      <label for="actions_tabata">Actions</label>
-      <input type="text" id="actions_tabata" name="actions"
-        value="mountain climber,push-up,sit-up,squat,supermans,plank,lunges,burpees" disabled>
-      <output for="actions_tabata" id="tabata_time">0</output>
-      <button onclick="set_timings(30,2,15);">Set default timing</button>
-      <button onclick="on_start_click(document.getElementById('actions_tabata').value);">Start</button>
-    </div>
-
-    <div>
-      <h4>Full Body</h4>
-      <label for="actions_fb">Actions</label>
-      <input type="text" id="actions_fb" name="actions" value="squats,pushups,lunges,plank,swimmer,situps,burpees"
-        disabled>
-      <output for="actions_fb" id="fb_time">0</output>
-      <button onclick="set_timings(30,2,15);">Set default timing</button>
-      <button onclick="on_start_click(document.getElementById('actions_fb').value);">Start</button>
-    </div>
-
-    <div>
-      <h4>WTF</h4>
-      <label for="actions_wtf">Actions</label>
-      <input type="text" id="actions_wtf" name="actions"
-        value="jumping jacks,diamond pushups,bethaks,grabbers,situps,dips,squats with kicks, dands, beetle crunches, rotating pushups"
-        disabled>
-      <output for="actions_wtf" id="wtf_time">0</output>
-      <button onclick="set_timings(60,2,15);">Set default timing</button>
-      <button onclick="on_start_click(document.getElementById('actions_wtf').value);">Start</button>
     </div>
 
   </section>

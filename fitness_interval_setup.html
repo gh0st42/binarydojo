@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interval Training</title>
+  <style>
+    /* body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    } */
+    input[type="range"] {
+      width: 400px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <script src="dojo.js"></script>
+  <script>
+    function update() {
+      var interval_length = document.getElementById('interval_length').value;
+      var num_intervals = document.getElementById('num_intervals').value;
+      var pause = document.getElementById('pause').value;
+
+      var actions_kad = document.getElementById('actions_kad').value.split(",");
+      var actions_custom = document.getElementById('actions_custom').value.split(",");
+      var actions_tabata = document.getElementById('actions_tabata').value.split(",");
+      var actions_fb = document.getElementById('actions_fb').value.split(",");
+      var actions_wtf = document.getElementById('actions_wtf').value.split(",");
+
+
+      document.getElementById('il_value').innerText = interval_length + 's';
+
+
+      document.getElementById('custom_time').innerText = secondsToMinutesAndSeconds((interval_length * num_intervals * actions_custom.length) + (num_intervals * pause * actions_custom.length));
+      document.getElementById('tabata_time').innerText = secondsToMinutesAndSeconds((interval_length * num_intervals * actions_tabata.length) + (num_intervals * pause * actions_tabata.length));
+      document.getElementById('fb_time').innerText = secondsToMinutesAndSeconds((interval_length * num_intervals * actions_fb.length) + (num_intervals * pause * actions_fb.length));
+      document.getElementById('wtf_time').innerText = secondsToMinutesAndSeconds((interval_length * num_intervals * actions_wtf.length) + (num_intervals * pause * actions_wtf.length));
+
+    }
+    function set_timings(interval_length, num_intervals, pause) {
+      document.getElementById('interval_length').value = interval_length;
+      document.getElementById('num_intervals').value = num_intervals;
+      document.getElementById('pause').value = pause;
+      update();
+    }
+    function on_start_click(actions) {
+      console.log("Start clicked with actions: " + actions);
+      var interval_length = document.getElementById('interval_length').value;
+      var num_intervals = document.getElementById('num_intervals').value;
+      var pause = document.getElementById('pause').value;
+      //var actions = actions.split(",");
+      // open interval.html with the following parameters
+      //window.open("interval.html?interval_length=" + interval_length + "&num_intervals=" + num_intervals + "&pause=" + pause + "&actions=" + actions.join(","));
+      location.href = "interval.html?interval_length=" + interval_length + "&num_intervals=" + num_intervals + "&pause=" + pause + "&actions=" + actions;
+    }
+  </script>
+</head>
+
+<body onload="update();">
+  <h1>Select Interval Training</h1>
+
+  <section>
+    <h3>General</h3>
+    <div>
+      <label for="interval_length">Interval Length</label>
+      <input type="range" id="interval_length" name="interval_length" min="10" max="120" value="30" step="10"
+        oninput="update();">
+      <output for="interval_length" id="il_value">30s</output>
+    </div>
+    <div>
+      <label for="num_intervals">Number of Intervals</label>
+      <input type="number" id="num_intervals" name="num_intervals" min="1" max="10" value="3" oninput="update();">
+    </div>
+    <div>
+      <label for="pause">Pause</label>
+      <input type="number" id="pause" name="pause" min="0" max="60" value="0" oninput="update()">
+    </div>
+  </section>
+  <section>
+    <h3>Fitness</h3>
+
+    <div>
+      <h4>Tabata</h4>
+      <label for="actions_tabata">Actions</label>
+      <input type="text" id="actions_tabata" name="actions"
+        value="mountain climber,push-up,sit-up,squat,supermans,plank,lunges,burpees" disabled>
+      <output for="actions_tabata" id="tabata_time">0</output>
+      <button onclick="set_timings(30,2,15);">Set default timing</button>
+      <button onclick="on_start_click(document.getElementById('actions_tabata').value);">Start</button>
+    </div>
+
+    <div>
+      <h4>Full Body</h4>
+      <label for="actions_fb">Actions</label>
+      <input type="text" id="actions_fb" name="actions" value="squats,pushups,lunges,plank,swimmer,situps,burpees"
+        disabled>
+      <output for="actions_fb" id="fb_time">0</output>
+      <button onclick="set_timings(30,2,15);">Set default timing</button>
+      <button onclick="on_start_click(document.getElementById('actions_fb').value);">Start</button>
+    </div>
+
+    <div>
+      <h4>WTF</h4>
+      <label for="actions_wtf">Actions</label>
+      <input type="text" id="actions_wtf" name="actions"
+        value="jumping jacks,diamond pushups,bethaks,grabbers,situps,dips,squats with kicks, dands, beetle crunches, rotating pushups"
+        disabled>
+      <output for="actions_wtf" id="wtf_time">0</output>
+      <button onclick="set_timings(60,2,15);">Set default timing</button>
+      <button onclick="on_start_click(document.getElementById('actions_wtf').value);">Start</button>
+    </div>
+
+  </section>
+
+  <section>
+    <h3>Custom</h4>
+      <label for="actions_custom">Actions</label>
+      <input type="text" id="actions_custom" name="actions" value="push,legs,pull,core" onchange="update();">
+      <output for="actions_custom" id="custom_time">0</output>
+      <button onclick="on_start_click(document.getElementById('actions_custom').value);">Start</button>
+  </section>
+</body>
+
+</html>

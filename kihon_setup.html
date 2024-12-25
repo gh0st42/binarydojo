@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set / Rep - Training</title>
+  <style>
+    /* body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    } */
+    input[type="range"] {
+      width: 400px;
+    }
+
+    input[type="text"] {
+      width: 600px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <script src="dojo.js"></script>
+  <script>
+    function update() {
+      var num_reps = document.getElementById('num_reps').value;
+      var timed = document.getElementById('timed').checked;
+      var time_per_rep = document.getElementById('time_per_rep').value;
+
+      document.getElementById('reps_value').innerText = num_reps;
+      document.getElementById('time_per_rep_value').innerText = time_per_rep / 1000 + 's';
+
+      document.getElementById('total_waza').innerText = num_reps * document.getElementById('actions').value.split(",").length;
+    }
+    function on_set_actions_clicked(actions) {
+      console.log("Setting actions to: " + actions);
+      document.getElementById('actions').value = actions;
+      update();
+    }
+
+    function on_start_click(actions) {
+      console.log("Start clicked with actions: " + actions);
+      var num_reps = document.getElementById('num_reps').value;
+      var timed = document.getElementById('timed').checked;
+      var time_per_rep = document.getElementById('time_per_rep').value;
+      var actions = document.getElementById('actions').value.split(",");
+      for (var i = 0; i < actions.length; i++) {
+        actions[i] = num_reps + "x " + actions[i].trim();
+      }
+
+      if (timed) {
+        // open interval.html with the following parameters
+        //window.open("interval.html?interval_length=" + interval_length + "&num_intervals=" + num_intervals + "&pause=" + pause + "&actions=" + actions.join(","));
+        location.href = "interval.html?interval_length=" + time_per_rep / 1000 * num_reps + "&num_intervals=" + 1 + "&pause=0" + "&actions=" + actions;
+      } else {
+        // open interval.html with the following parameters
+        //window.open("interval.html?interval_length=" + interval_length + "&num_intervals=" + num_intervals + "&pause=" + pause + "&actions=" + actions.join(","));
+        location.href = "interval.html?manual_advance=1&num_intervals=1&pause=0" + "&actions=" + actions;
+      }
+
+    }
+  </script>
+</head>
+
+<body onload="update();">
+  <h1>Select Basic Training</h1>
+
+  <section>
+    <h3>General</h3>
+    <div>
+      <label for="num_reps">Number of Repetitions</label>
+      <input type="range" id="num_reps" name="num_reps" min="2" max="10" value="4" step="1" oninput="update();">
+      <output for="num_reps" id="reps_value">0</output>
+    </div>
+    <div>
+      <label for="timed">Automatically move forward</label>
+      <input type="checkbox" id="timed" name="timed" value="timed" onchange="update();">
+    </div>
+    <div>
+      <label for="time_per_rep">Time per rep in ms (only for auto mode)</label>
+      <input type="time_per_rep" id="time_per_rep" name="time_per_rep" min="250" max="10000" value="1500" step="250"
+        oninput="update();">
+      <output for="time_per_rep" id="time_per_rep_value">0</output>
+    </div>
+    <div>
+      <label for="actions">Actions</label>
+      <textarea id="actions" name="actions" disabled>
+Choku Tsuki, Tate Tsuki, Kage Tsuki, Ura Tsuki, Age Uke, Soto Uke, Uchi Uke, Gedan Barai, Nagashi Uke, Shuto Uke
+      </textarea>
+      <!-- <output for="actions" id="total_waza">0</output> -->
+      <button onclick="on_start_click();">Start</button>
+    </div>
+  </section>
+  <section>
+    <h3>Kihon</h3>
+
+    <div>
+      <h4>Basic Tsuki and Uke Techniques</h4>
+      <label for="actions_tsuki_uke">Actions</label>
+      <textarea id="actions_tsuki_uke" name="actions_tsuki_uke" disabled>
+Choku Tsuki, Tate Tsuki, Kage Tsuki, Ura Tsuki, Age Uke, Soto Uke, Uchi Uke, Gedan Barai, Nagashi Uke, Shuto Uke
+      </textarea>
+      <button onclick="on_set_actions_clicked(document.getElementById('actions_tsuki_uke').value);">Set</button>
+    </div>
+  </section>
+
+  <section>
+    <h3>Custom</h4>
+      <label for="actions_custom">Actions</label>
+      <input type="text" id="actions_custom" name="actions" value="attack,defend" onchange="update();">
+      <button onclick="on_set_actions_clicked(document.getElementById('actions_custom').value);">Set</button>
+  </section>
+</body>
+
+</html>
