@@ -60,11 +60,21 @@
       right: 0;
       padding: 10px;
       background-color: rgba(0, 0, 0, 0.5);
-      font-size: smaller;
+      font-size: xx-small;
     }
   </style>
   <script src="dojo.js"></script>
   <script>
+    function on_load() {
+      var styleselect_combo = document.getElementById('styleselect_combo');
+      var styles = Object.keys(katas);
+      styles.forEach(style => {
+        var opt = document.createElement('option');
+        opt.value = style;
+        opt.innerHTML = style;
+        styleselect_combo.appendChild(opt);
+      });
+    }
     function update() {
       var style = document.getElementById('styleselect_combo').value;
       console.log("Style selected: " + style);
@@ -74,14 +84,11 @@
   </script>
 </head>
 
-<body>
+<body onload="on_load();">
   <h1>Binary Dojo</h1>
   <div id="styleselect">
     Choose your style:
     <select onchange="update();" id="styleselect_combo">
-      <option value="shotokan">Shotokan</option>
-      <option value="goju-ryu">Goju-ryu</option>
-      <option value="wado-ryu">Wado-ryu</option>
     </select>
   </div>
   <ul>

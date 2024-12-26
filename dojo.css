@@ -1,0 +1,20 @@
+input[type="range"] {
+  width: 400px;
+}
+
+input[type="text"] {
+  width: 600px;
+}
+
+.description {
+  font-size: 0.8em;
+  color: #392b2b;
+  background-color: rgb(255, 214, 66);
+  padding: 20px;
+  margin: 40px;
+  border-radius: 10px;
+}
+
+.description>p {
+  margin: 0.4em;
+}

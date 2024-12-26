@@ -4,25 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Set / Rep - Training</title>
-  <style>
-    /* body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial, sans-serif;
-    } */
-    input[type="range"] {
-      width: 400px;
-    }
-
-    input[type="text"] {
-      width: 600px;
-    }
-  </style>
+  <title>Kihon Training</title>
   <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <link rel="stylesheet" href="dojo.css">
   <script src="dojo.js"></script>
   <script>
     function update() {
@@ -66,10 +50,19 @@
 </head>
 
 <body onload="update();">
-  <h1>Select Basic Training</h1>
+  <h1>Basic Kihon</h1>
 
   <section>
     <h3>General</h3>
+    <div class="description">
+      <p>Basic training for kihon (basic techniques) can be done in various ways. The following setup allows you to
+        select the number of repetitions and a list of actions to be performed. You have to click the action during
+        training after completing one set to advance to the next one.
+        You can also choose to automatically move forward to the next set if you configure the time per repetition.
+        <br>
+        <i>Note: You must be quick to complete the set in time :)</i>
+      </p>
+    </div>
     <div>
       <label for="num_reps">Number of Repetitions</label>
       <input type="range" id="num_reps" name="num_reps" min="2" max="10" value="4" step="1" oninput="update();">
@@ -101,16 +94,49 @@ Choku Tsuki, Tate Tsuki, Kage Tsuki, Ura Tsuki, Age Uke, Soto Uke, Uchi Uke, Ged
       <h4>Basic Tsuki and Uke Techniques</h4>
       <label for="actions_tsuki_uke">Actions</label>
       <textarea id="actions_tsuki_uke" name="actions_tsuki_uke" disabled>
-Choku Tsuki, Tate Tsuki, Kage Tsuki, Ura Tsuki, Age Uke, Soto Uke, Uchi Uke, Gedan Barai, Nagashi Uke, Shuto Uke
+Choku Tsuki, Tate Tsuki, Ura Tsuki, Kage Tsuki, Age Uke, Soto Uke, Uchi Uke, Gedan Barai, Nagashi Uke, Shuto Uke
       </textarea>
+      <div class="description">
+        Execute techniques standing still in, e.g., kiba dachi or heiko dachi, or move in lines forward and backward.
+        <br>
+        <p>Techniques:</p>
+        <p>Choku Tsuki: Straight punch</p>
+        <p>Tate Tsuki: Vertical punch</p>
+        <p>Kage Tsuki: Hook punch</p>
+        <p>Ura Tsuki: Upside down punch</p>
+        <p>Age Uke: Rising block</p>
+        <p>Soto Uke: Outside block</p>
+        <p>Uchi Uke: Inside block</p>
+        <p>Gedan Barai: Downward block</p>
+        <p>Nagashi Uke: Sweeping block</p>
+        <p>Shuto Uke: Knifehand block</p>
+      </div>
       <button onclick="on_set_actions_clicked(document.getElementById('actions_tsuki_uke').value);">Set</button>
     </div>
+  </section>
+
+  <div>
+    <h4>Basic Block Counter Combinations</h4>
+    <label for="actions_bc">Actions</label>
+    <textarea id="actions_bc" name="actions_bc" disabled>
+Gedan Barai & Gyaku Tsuki, Age Uke & Gyaku Tsuki, Soto Uke & Gyaku Tsuki, Uchi Uke & Gyaku Tsuki, Shuto Uke & Nukite
+    </textarea>
+    <div class="description">
+      Start from heiko dachi (yoi/ready stance), move into "block" stance, execute block and counter punch. Stances
+      can
+      zenkutsu dachi, sanchin/hangetsu dachi or nekoachi/kokutsu dachi depending on techniques. "Block" either moving
+      forward into the enemy or back-/sidewards.
+      </p>
+    </div>
+    <button onclick="on_set_actions_clicked(document.getElementById('actions_bc').value);">Set</button>
+  </div>
   </section>
 
   <section>
     <h3>Custom</h4>
       <label for="actions_custom">Actions</label>
-      <input type="text" id="actions_custom" name="actions" value="attack,defend" onchange="update();">
+      <input type="text" id="actions_custom" name="actions" value="Kizami & Gyaku Tzuki, Gyaku Tzuki & Mawashi Geri"
+        onchange="update();">
       <button onclick="on_set_actions_clicked(document.getElementById('actions_custom').value);">Set</button>
   </section>
 </body>
