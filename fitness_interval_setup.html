@@ -44,7 +44,7 @@
       //var actions = actions.split(",");
       // open interval.html with the following parameters
       //window.open("interval.html?interval_length=" + interval_length + "&num_intervals=" + num_intervals + "&pause=" + pause + "&actions=" + actions.join(","));
-      location.href = "interval.html?interval_length=" + interval_length + "&num_intervals=" + num_intervals + "&pause=" + pause + "&actions=" + actions;
+      location.href = "interval.html?interval_length=" + interval_length + "&num_intervals=" + num_intervals + "&pause=" + pause + "&actions=" + actions.replace(/&/g, "%26");
     }
   </script>
 </head>

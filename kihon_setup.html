@@ -30,7 +30,8 @@
       var num_reps = document.getElementById('num_reps').value;
       var timed = document.getElementById('timed').checked;
       var time_per_rep = document.getElementById('time_per_rep').value;
-      var actions = document.getElementById('actions').value.split(",");
+      var escaped_actions = document.getElementById('actions').value.replace(/&/g, "%26");
+      var actions = escaped_actions.split(",");
       for (var i = 0; i < actions.length; i++) {
         actions[i] = num_reps + "x " + actions[i].trim();
       }
