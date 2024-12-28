@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reflex Training</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <link rel="stylesheet" href="dojo.css">
+  <script src="dojo.js"></script>
+
+  <script>
+    function update() {
+      var total_time = document.getElementById('total_time').value;
+      var time_per_cmd = document.getElementById('time_per_cmd').value;
+
+      document.getElementById('total_time_out').innerText = secondsToMinutesAndSeconds(total_time);
+      document.getElementById('time_per_cmd_value').innerText = time_per_cmd / 1000 + 's';
+
+    }
+
+    function on_start_click(actions) {
+      console.log("Start clicked with actions: " + actions);
+      var total_time = document.getElementById('total_time').value;
+      var time_per_cmd = document.getElementById('time_per_cmd').value;
+      var dual_color = document.getElementById('dual_color').checked;
+      var max_idle_time = 5;
+      var target = [];
+      for (var i = 1; i <= 9; i++) {
+        if (document.getElementById('grid_' + i).checked) {
+          target.push(i);
+        }
+      }
+      console.log("Target: " + target);
+      // open interval.html with the following parameters
+      //window.open("interval.html?interval_length=" + interval_length + "&num_intervals=" + num_intervals + "&pause=" + pause + "&actions=" + actions.join(","));
+      location.href = "reflex.html?total_length=" + total_time + "&time_per_cmd=" + time_per_cmd + "&dual_color=" + dual_color + "&max_idle_time=" + max_idle_time + "&targets=" + target;
+
+    }
+  </script>
+</head>
+
+<body onload="update();">
+  <h1>Sensei Says...</h1>
+  <section>
+    <div class="description">
+      <p>When sensei says a command, you have to react as fast as possible. The commands can be anything from basic
+        attacks/blocks on a specified target region to more complex combinations or athletic exercises like jumping or
+        ducking.
+        <br>
+        <i>Note: You must be quick to complete the set in time :)</i>
+      </p>
+    </div>
+    <div>
+      <label for="total_time">Total sparring time:</label>
+      <input type="range" id="total_time" name="total_time" min="30" max="300" value="120" step="30"
+        oninput="update();">
+      <output for="total_time" id="total_time_out">0</output>
+    </div>
+    <div>
+      <label for="time_per_cmd">Duration for which a command is shown in milliseconds.</label>
+      <input type="time_per_cmd" id="time_per_cmd" name="time_per_cmd" min="250" max="10000" value="1500" step="250"
+        oninput="update();">
+      <output for="time_per_cmd" id="time_per_cmd_value">0</output>
+    </div>
+    <div>
+      Target Grid
+      <table id="grid">
+        <tr>
+          <td><input type="checkbox" id="grid_1" name="grid" checked></td>
+          <td><input type="checkbox" id="grid_2" name="grid" checked></td>
+          <td><input type="checkbox" id="grid_3" name="grid" checked></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="grid_4" name="grid" checked></td>
+          <td><input type="checkbox" id="grid_5" name="grid" checked></td>
+          <td><input type="checkbox" id="grid_6" name="grid" checked></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="grid_7" name="grid" checked></td>
+          <td><input type="checkbox" id="grid_8" name="grid" checked></td>
+          <td><input type="checkbox" id="grid_9" name="grid" checked></td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <label for="dual_color">Dual color per target, e.g., red for attack, green for block:
+        <input type="checkbox" id="dual_color" name="dual_color" checked></label>
+      <br>
+    </div>
+    <div>
+      <button onclick="on_start_click();">Start</button>
+    </div>
+  </section>
+</body>
+
+</html>

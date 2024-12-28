@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binary Dojo</title>
+  <style>
+    @font-face {
+      font-family: 'NightinTokyo';
+      src: url('NightinTokyo.ttf') format('truetype');
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      /* background: linear-gradient(to bottom, #f52233, #FFC371); */
+      /* background-image: url('background.png'); */
+      /* background-repeat: no-repeat; */
+      /* background-attachment: fixed; */
+      background-color: black;
+      background-size: cover;
+      font-family: 'NightinTokyo', Arial, sans-serif;
+      color: white;
+      text-align: center;
+      font-size: 2em;
+    }
+
+    h1 {
+      font-family: 'NightinTokyo', Arial, sans-serif;
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 10px 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    u {
+      font-size: 1em;
+      padding: 40px;
+    }
+
+    p {
+      font-size: 0.7em;
+      padding: 20px;
+    }
+
+    #styleselect {
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      font-size: xx-small;
+    }
+  </style>
+  <script src="dojo.js"></script>
+</head>
+
+<body>
+  <h1>About Binary Dojo</h1>
+  <div id="styleselect">
+    <a href="index.html">Home</a>
+  </div>
+  <div style="width: 80%;">
+    <p>Binary Dojo is a collection of web-based tools for my own personal use and potentially other (experienced)
+      martial artists.
+      It is a work in progress, and new tools will be added over time. The tools are designed to be flexible and
+      accessible from any device with a web browser.</p>
+    <p><b style="color: red;">The projects does not teach you karate, but it can give you inspiration for solo training
+        if you already know
+        karate. Use at your own risk!</b></p>
+    <p>This is a personal project of mine which started as a visual basic program on my desktop years ago, then was
+      ported to swift for an iOS app and now finally was made available to all devices via a simple web
+      application.</p>
+    <p>Feel free to contribute to the <a href="https://github.com/gh0st42/binarydojo"><span
+          style="color: rgb(37, 145, 240)">Binary Dojo</span> project via GitHub</a> pull
+      requests or by opening issues there. Just remember this is a just-for-fun side project.
+      Code wise, I try to keep everything simple, no nodejs, just plain html, css and javascript, and minimal to no
+      external dependencies -
+      all public domain or open source.
+      It should be useable without a browser or internet connection if you open the files locally.</p>
+    <p>Currently, the only external dependency is the awesome <a href="https://simplecss.org"><span
+          style="color: rgb(37, 145, 240)">simplecss</span></a>.</p>
+  </div>
+</body>
+
+</html>

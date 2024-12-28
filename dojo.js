@@ -1,3 +1,12 @@
+const parseBool = (params) => {
+  return !(
+    params === "false" ||
+    params === "0" ||
+    params === "" ||
+    params === undefined
+  );
+};
+
 var m_w = 123456789;
 var m_z = 987654321;
 var mask = 0xffffffff;

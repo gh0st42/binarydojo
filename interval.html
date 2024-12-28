@@ -42,6 +42,10 @@
         console.log("Manual advance");
         counter = 0;
         update();
+      } else if (cur_state == "post") {
+        console.log("Back");
+        // return to previous page
+        window.history.back();
       }
     }
     var init_interval_length = 5; // seconds
