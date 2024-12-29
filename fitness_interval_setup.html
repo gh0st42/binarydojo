@@ -75,8 +75,9 @@
     <div>
       <h4>Tabata</h4>
       <label for="actions_tabata">Actions</label>
-      <input type="text" id="actions_tabata" name="actions"
-        value="mountain climber,push-up,sit-up,squat,supermans,plank,lunges,burpees" disabled>
+      <textarea id="actions_tabata" name="actions" disabled>
+        mountain climber,push-up,sit-up,squat,supermans,plank,lunges,burpees
+      </textarea>
       <output for="actions_tabata" id="tabata_time">0</output>
       <button onclick="set_timings(30,2,15);">Set default timing</button>
       <button onclick="on_start_click(document.getElementById('actions_tabata').value);">Start</button>
@@ -85,8 +86,9 @@
     <div>
       <h4>Full Body</h4>
       <label for="actions_fb">Actions</label>
-      <input type="text" id="actions_fb" name="actions" value="squats,pushups,lunges,plank,swimmer,situps,burpees"
-        disabled>
+      <textarea id="actions_fb" name="actions" disabled>
+        squats,pushups,lunges,plank,swimmer,situps,burpees
+      </textarea>
       <output for="actions_fb" id="fb_time">0</output>
       <button onclick="set_timings(30,2,15);">Set default timing</button>
       <button onclick="on_start_click(document.getElementById('actions_fb').value);">Start</button>
@@ -95,9 +97,9 @@
     <div>
       <h4>WTF</h4>
       <label for="actions_wtf">Actions</label>
-      <input type="text" id="actions_wtf" name="actions"
-        value="jumping jacks,diamond pushups,bethaks,grabbers,situps,dips,squats with kicks, dands, beetle crunches, rotating pushups"
-        disabled>
+      <textarea id="actions_wtf" name="actions" disabled>
+        jumping jacks,diamond pushups,bethaks,grabbers,situps,dips,squats with kicks, dands, beetle crunches, rotating pushups
+      </textarea>
       <output for="actions_wtf" id="wtf_time">0</output>
       <button onclick="set_timings(60,2,15);">Set default timing</button>
       <button onclick="on_start_click(document.getElementById('actions_wtf').value);">Start</button>
